@@ -7,7 +7,7 @@ Vagrant.configure("2") do | config |
         end 
 		web.vm.network "private_network", ip: "192.168.99.100" 
 		web.vm.network "forwarded_port", guest: 80, host: 8000
-        web.vm.network "forwarded_port", guest: 8080, host: 8080
+        web.vm.network "forwarded_port", guest: 5050, host: 5050
         web.vm.provision "shell", path: "docker-setup.sh"
 		config.vm.provision "file", source: "./WebCourseWork/", destination: "$HOME/WebCourseWork"
     end     

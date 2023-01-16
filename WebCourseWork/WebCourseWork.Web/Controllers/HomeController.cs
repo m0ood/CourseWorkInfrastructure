@@ -11,9 +11,9 @@ namespace WebCourseWork.Web.Controllers
         private readonly ILogger<HomeController> _logger;
         private List<Player>? Players = new List<Player>();
         private HttpClient _client;
-        private string? API = Environment.GetEnvironmentVariable("WebCourseWork.API");
         public HomeController(ILogger<HomeController> logger)
         {
+            string? API = Environment.GetEnvironmentVariable("WebCourseWork");
             _logger = logger;
             _client = new HttpClient();
             _client.BaseAddress = new Uri(API);

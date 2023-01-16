@@ -1,5 +1,5 @@
 #!/bin/bash
-
+ls -a
 echo "* Add hosts ..."
 echo "192.168.99.100 docker.lab docker" >> /etc/hosts
 
@@ -17,11 +17,11 @@ echo "* Install Docker ..."
 apt-get update
 apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 sudo snap install docker
-
+sudo apt  install docker-compose
 echo "* Add vagrant user to docker group ..."
-usermod -aG docker vagrant
+sudo usermod -aG docker vagrant
 
-cd /WebCourseWork
+cd WebCourseWork
 echo "version: '3.4' 
  
 networks: 
@@ -38,7 +38,7 @@ services:
       context: WebCourseWork.Web 
       dockerfile: Dockerfile 
     environment:
-        - WebCourseWork.API=http://webcoursework.api:80/
+        - WebCourseWork=http://webcoursework.api:80/
     ports: 
       - "5050:80" 
     networks: 
@@ -51,6 +51,6 @@ services:
       context: WebCourseWork.API 
       dockerfile: Dockerfile     
     networks: 
-      - services-network" >> /docker-compose.yml
+      - services-network" >> docker-compose.yml
 docker-compose build
 docker-compose up
